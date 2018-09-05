@@ -25,14 +25,19 @@ async def on_message(message):
     """Add userdata json file and run certain functionality when a user types
     any message, anywhere.
     """
-    #if message.content.startswith("?"):
-    #    await client.send_message(message.channel, "Name: {}, ID: {}".format(message.author.name, message.author.id))
+    if message.author == client.user:
+        return
 
     # Let's create a JSON file for this user.
     if not os.path.isfile("userdata/{}_{}.json".format(message.author.name, message.author.id)):
-        with open("userdata/{}_{}.json".format(message.author.name, message.author.id), "w") as outfile:
+        with open("userdata/{}_{}.json".format(message.author.name, message.author.id), "w") as f:
             user_json = {"name": message.author.name, "id": message.author.id}
-            json.dump(user_json, outfile)
+            json.dump(user_json, f)
+
+    # Increment the counter, and if the counter is high enough, get a key!
+    r = mudules.chest_key(message)
+    if r != "":
+        await client.send_message(message.channel, r)
 
     # This allows us to use other commands as well.
     await client.process_commands(message)
@@ -49,7 +54,7 @@ async def chest(ctx, stuff=""):
     """Grant the user an item! They will need a key, in later functionality.
 
     Items taken at random from the Elder Scrolls Items Twitter."""
-    await client.say("You found...{}!".format(mudules.chest()))
+    await client.say(mudules.chest(ctx))
 
 
 client.run(TOKEN)
