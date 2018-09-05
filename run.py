@@ -25,7 +25,7 @@ async def on_message(message):
     """Add userdata json file and run certain functionality when a user types
     any message, anywhere.
     """
-    if message.author == client.user:
+    if message.author == client.user or message.author.bot:
         return
 
     # Let's create a JSON file for this user.
