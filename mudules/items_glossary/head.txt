@@ -1,0 +1,5 @@
+hat
+helmet
+cap
+horns
+mask

@@ -1,0 +1,6 @@
+greaves
+shorts
+trunks
+pants
+skirt
+dress

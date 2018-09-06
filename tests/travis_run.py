@@ -36,7 +36,7 @@ async def on_ready():
 
     # !chest
     await client.send_message(bot_channel, "!chest")
-    for i in range(8):
+    for i in range(3):
         time.sleep(1)
         await client.send_message(bot_channel, "Incrementing key_counter...")
     time.sleep(3)

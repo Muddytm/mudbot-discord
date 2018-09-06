@@ -20,9 +20,16 @@ api = twitter.Api(consumer_key=config.CONSUMER_KEY,
                   access_token_key=config.ACCESS_TOKEN_KEY,
                   access_token_secret=config.ACCESS_TOKEN_SECRET)
 
+#dirs = os.listdir()
+#with open("mudules/")
+
 
 def chest(ctx):
     """Query TES_ItemsBot."""
+    name = ctx.message.author.name.replace(" ", "")
+    name_full = ctx.message.author.name
+    id = ctx.message.author.id
+
     try:
         search = api.GetSearch("TES_ItemsBot")
     except twitter.error.TwitterError:
@@ -30,7 +37,7 @@ def chest(ctx):
     except Exception as e:
         return ("I AM ERROR, BEEP BOOP:\n```{}```".format(e.message))
 
-    with open("userdata/{}_{}.json".format(ctx.message.author.name.replace(" ", ""), ctx.message.author.id)) as f:
+    with open("userdata/{}_{}.json".format(name, id)) as f:
         data = json.load(f)
 
     if data["chest"]["keys"] > 0:
@@ -42,12 +49,13 @@ def chest(ctx):
 
         found_item = random.choice(item_list)
 
-        with open("userdata/{}_{}.json".format(ctx.message.author.name.replace(" ", ""), ctx.message.author.id), "w") as f:
+        with open("userdata/{}_{}.json".format(name, id), "w") as f:
             json.dump(data, f)
 
-        return ("{} found...{}!".format(ctx.message.author.name, found_item))
+        equip(found_item, name, id)
+        return ("{} found...{}!".format(name_full, found_item))
     else:
-        return ("{} has no keys to open the chest with.".format(ctx.message.author.name))
+        return ("{} has no keys to open the chest with.".format(name_full))
 
 
 def chest_key(message):
@@ -66,6 +74,15 @@ def chest_key(message):
         data["chest"] = {}
         data["chest"]["key_counter"] = 0
         data["chest"]["keys"] = 0
+        data["chest"]["loadout"] = {}
+        data["chest"]["loadout"]["head"] = "Fedora of Staunch Odor"
+        data["chest"]["loadout"]["chest"] = "\"Eat. Sleep. Play Fortnite.\" T-Shirt of Purity"
+        data["chest"]["loadout"]["arms"] = "Fingerless Gloves of Dexterity"
+        data["chest"]["loadout"]["legs"] = "Minor Cargo Shorts of Celibacy"
+        data["chest"]["loadout"]["feet"] = "Combat Boots of Charm Resistance"
+        data["chest"]["loadout"]["weapon"] = "Hatsune Miku Vintage Body Pillow (quality: used)"
+        data["chest"]["loadout"]["spell"] = "Word of Power Learned: Repel, Attractive Woman"
+        data["chest"]["loadout"]["trinket"] = "Empowered Nintendo 3DS of Pokemon Husbandry"
 
     new_key = False
     if data["chest"]["key_counter"] < (int(config.key_counter_threshold) - 1):
@@ -82,3 +99,23 @@ def chest_key(message):
         return ("{} got a key! Type !chest to use it.".format(message.author.name))
     else:
         return ("")
+
+
+def equip(found_item, name, id):
+    """Equip user with new item."""
+    slot = determine_slot(found_item)
+
+
+def determine_slot(found_item):
+    """Determine whether the item is:
+    a) Armor
+        - head
+        - chest
+        - arms
+        - legs
+        - feet
+    b) Weapon/Misc
+        - weapon
+        - spell
+        - trinket
+    """

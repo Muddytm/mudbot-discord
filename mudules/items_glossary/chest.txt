@@ -1,0 +1,5 @@
+shirt
+jersey
+jacket
+overalls
+bra

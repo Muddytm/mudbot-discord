@@ -1,0 +1,11 @@
+sword
+axe
+bow
+pike
+warhammer
+hammer
+dagger
+staff
+polearm
+katana
+shuriken
