@@ -6,32 +6,27 @@ Mudbot is a Discord bot used for general-purpose hootenannying. It's also easy t
 
 ## Setup
 
-Running Mudbot requires having installed Python 3.7, so get that done. You'll also want to download the Mudbot code itself, so use `git clone` or whatever to get that done.
+Running Mudbot requires having a version of Python installed that is 3.5 or higher (and preferably lower than 3.7, though not strictly necessary), so get that done. You'll also want to download the Mudbot code itself, so use `git clone` or whatever to do so.
 
 Once that's good and over with, run the following command line in Linux, or Powershell, or what-have-you:
 
 `pip3 install discord.py`
 
-The pip3 service will download the discord.py package along with its dependencies...but wait! There's more!
+The pip3 service will download the discord.py package along with its dependencies.
 
-The packages it installs (aiohttp, websockets, and the discord.py app itself) are not 100% up to date to work with Python 3.7, so some patching is required lest you crash.
+Next, you'll need to create a Discord app, create a bot user, and have it join your Discord server. After that, grab your app token (from the bot users page), and create a file named config.py in the same directory as run.py for the bot. You can just copy config_template.py and put the app token in the relevant place (the other keys shown are not necessary).
 
+And at that point, running `python run.py` (or `python3 run.py` depending on what version `python` calls) should start the bot without any problems!
 
-So, you'll want to head over to the python37_patches directory (in the Mudbot repo, wherever you have it copied to), and run the following:
+Unless you're using **Python 3.7**. If so, read on.
 
-`python aiohttp_patch.py`
+The packages that are installed (aiohttp, websockets, and the discord.py app itself) are not 100% up to date to work with Python 3.7, so some patching is required lest you crash.
 
-`python websockets_patch.py`
+So, you'll want to head over to the python37_patches directory (in the Mudbot repo, wherever you have it copied to), edit the patch_config.py to list your packages location file (where aiohttp, websockets, and discord.py reside) and run the following:
 
-`python discordpy_patch.py`
+`python patch.py`
 
-Sorry about all that hassle. Things should be working fine now, but before you can actually run your bot you're gonna need to set up your configuration files.
-
-To do this, you'll need to create a Discord app, create a bot user, and have it join your Discord server.
-
-You'll also want to grab your app token (from the bot users page), and create a file named config.py in the same directory as run.py for the bot. You can just copy config_template.py and put the app token in the relevant place (the other keys shown are not necessary).
-
-That's it! Well, I say that's "it"...that's a lot of hassle for a bot. I'll work on making this less of a thing you have to do.
+Your bot should now work with Python 3.7! Well done.
 
 ## Usage
 
@@ -43,9 +38,8 @@ Right now there are small amount of functions available:
 
 ## FUTUUUUUUUURE
 
-- Add more functions (on-going)
-- Create one-and-done setup method
-- Better documentation (on-going)
-- Create guide explaining Discord functions, and how to add one to this bot
+- Add more functions! (on-going)
+- Better documentation! (on-going)
+- Create guide explaining Discord functions, and how to add one to this bot.
 - Make a neat logo?
-- Use Coveralls to get code coverage data
+- Use Coveralls to get code coverage data.
