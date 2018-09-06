@@ -34,8 +34,8 @@ async def on_message(message):
         return
 
     # Let's create a JSON file for this user.
-    if not os.path.isfile("userdata/{}_{}.json".format(message.author.name, message.author.id)):
-        with open("userdata/{}_{}.json".format(message.author.name, message.author.id), "w") as f:
+    if not os.path.isfile("userdata/{}_{}.json".format(message.author.name.replace(" ", ""), message.author.id)):
+        with open("userdata/{}_{}.json".format(message.author.name.replace(" ", ""), message.author.id), "w") as f:
             user_json = {"name": message.author.name, "id": message.author.id}
             json.dump(user_json, f)
 
