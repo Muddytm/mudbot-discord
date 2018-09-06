@@ -6,4 +6,6 @@ install:
   - pip3 install requests
   - pip3 install python-twitter
 script:
-  - python tests/discordpy_repair.py ; python run.py test ; python tests/travis_run.py
+  - python tests/discordpy_repair.py
+  - python run.py test
+  - python tests/travis_run.py
