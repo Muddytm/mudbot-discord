@@ -7,8 +7,5 @@ install:
   - pip3 install requests
   - pip3 install python-twitter
 script:
-  - python python37_patches/discordpy_patch.py
-  - python python37_patches/websockets_patch.py
-  - python python37_patches/aiohttp_patch.py
   - python tests/config_maker.py
   - python run.py test & python tests/travis_run.py
