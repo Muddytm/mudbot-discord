@@ -1,4 +1,5 @@
 config.py
 configs/*_config.py
+tests/*_config.py
 __pycache__/
 userdata/*.json

@@ -1,4 +1,4 @@
-"""Return an object from TES_ItemsBot. In later functionality, this will require a key."""
+"""Return an object from TES_ItemsBot. Requires a key."""
 
 import os
 

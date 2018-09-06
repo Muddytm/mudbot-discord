@@ -5,19 +5,24 @@ import discord
 import json
 import mudules
 import os
+import sys
+
+if os.path.isfile("tests/test_config.py") and len(sys.argv) > 1 and sys.argv[1] == "test":
+    import tests.test_config as testconfig
+    TOKEN = testconfig.mudbot_app_token
+else:
+    TOKEN = config.app_token
 
 BOT_PREFIX = "!"
-TOKEN = config.app_token
-
 client = commands.Bot(command_prefix=commands.when_mentioned_or(BOT_PREFIX))
 
 
 @client.event
 async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
+    print ("Logged in as")
+    print (client.user.name)
+    print (client.user.id)
+    print ("------")
 
 
 @client.event
@@ -25,7 +30,7 @@ async def on_message(message):
     """Add userdata json file and run certain functionality when a user types
     any message, anywhere.
     """
-    if message.author == client.user or message.author.bot:
+    if message.author == client.user or (message.author.bot and "Travis" not in message.author.name):
         return
 
     # Let's create a JSON file for this user.
@@ -51,10 +56,17 @@ async def test(ctx, stuff="Despacito"):
 
 @client.command(pass_context=True)
 async def chest(ctx, stuff=""):
-    """Grant the user an item! They will need a key, in later functionality.
+    """Grant the user an item! If they have a key.
 
     Items taken at random from the Elder Scrolls Items Twitter."""
     await client.say(mudules.chest(ctx))
+
+
+@client.command(pass_context=True)
+async def scram(ctx, stuff=""):
+    """Close the bot."""
+    await client.say("I'm outta here.")
+    await client.logout()
 
 
 client.run(TOKEN)
