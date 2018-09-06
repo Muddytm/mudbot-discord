@@ -9,3 +9,5 @@ staff
 polearm
 katana
 shuriken
+halberd
+knife

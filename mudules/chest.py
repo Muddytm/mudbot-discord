@@ -20,8 +20,15 @@ api = twitter.Api(consumer_key=config.CONSUMER_KEY,
                   access_token_key=config.ACCESS_TOKEN_KEY,
                   access_token_secret=config.ACCESS_TOKEN_SECRET)
 
-#dirs = os.listdir()
-#with open("mudules/")
+dirs = os.listdir("mudules/items_glossary")
+glossary = {}
+for filename in dirs:
+    glossary[filename.replace(".txt", "")] = []
+    with open("mudules/items_glossary/{}".format(filename)) as f:
+        lines = f.readlines()
+        for line in lines:
+            if line.strip():
+                glossary[filename.replace(".txt", "")].append(line.strip())
 
 
 def chest(ctx):
@@ -31,9 +38,9 @@ def chest(ctx):
     id = ctx.message.author.id
 
     try:
-        search = api.GetSearch("TES_ItemsBot")
-    except twitter.error.TwitterError:
-        return ("The configuration file for this plugin is empty! Bug the admins to fix it.")
+        search = api.GetUserTimeline(screen_name="TES_ItemsBot", count=200)
+    except twitter.error.TwitterError as e:
+        return ("Twitter error: {}".format(e))
     except Exception as e:
         return ("I AM ERROR, BEEP BOOP:\n```{}```".format(e.message))
 
@@ -52,14 +59,18 @@ def chest(ctx):
         with open("userdata/{}_{}.json".format(name, id), "w") as f:
             json.dump(data, f)
 
-        equip(found_item, name, id)
-        return ("{} found...{}!".format(name_full, found_item))
+        slot = equip(found_item, name, id)
+        return ("{} found...{}!\nIt was equipped to your \"{}\" slot.".format(name_full, found_item, slot))
     else:
         return ("{} has no keys to open the chest with.".format(name_full))
 
 
 def chest_key(message):
     """Increment the counter, and if the counter is high enough, get a key!"""
+    name = message.author.name.replace(" ", "")
+    name_full = message.author.name
+    id = message.author.id
+
     try:
         int(config.key_counter_threshold)
     except ValueError:
@@ -67,7 +78,7 @@ def chest_key(message):
                 "Have your admins fix the configuration settings to defeat "
                 "this menace.")
 
-    with open("userdata/{}_{}.json".format(message.author.name.replace(" ", ""), message.author.id)) as f:
+    with open("userdata/{}_{}.json".format(name, id)) as f:
         data = json.load(f)
 
     if "chest" not in data:
@@ -92,11 +103,11 @@ def chest_key(message):
         data["chest"]["keys"] += 1
         new_key = True
 
-    with open("userdata/{}_{}.json".format(message.author.name.replace(" ", ""), message.author.id), "w") as f:
+    with open("userdata/{}_{}.json".format(name, id), "w") as f:
         json.dump(data, f)
 
     if new_key:
-        return ("{} got a key! Type !chest to use it.".format(message.author.name))
+        return ("{} got a key! Type !chest to use it.".format(name_full))
     else:
         return ("")
 
@@ -104,6 +115,15 @@ def chest_key(message):
 def equip(found_item, name, id):
     """Equip user with new item."""
     slot = determine_slot(found_item)
+    with open("userdata/{}_{}.json".format(name, id)) as f:
+        data = json.load(f)
+
+    data["chest"]["loadout"][slot] = found_item
+
+    with open("userdata/{}_{}.json".format(name, id), "w") as f:
+        json.dump(data, f)
+
+    return slot
 
 
 def determine_slot(found_item):
@@ -119,3 +139,36 @@ def determine_slot(found_item):
         - spell
         - trinket
     """
+    found_item = found_item.lower()
+    if "potion" in found_item:
+        return "trinket"
+    elif "word of power" in found_item or "spell tome" in found_item:
+        return "spell"
+
+    for slot in glossary:
+        for item in glossary[slot]:
+            if item in found_item:
+                return slot
+
+    return "trinket"
+
+
+def display_loadout(name, id):
+    """Return loadout string."""
+    with open("userdata/{}_{}.json".format(name, id)) as f:
+        data = json.load(f)
+
+    loadout = ""
+
+    # I do this inefficiently because I want it ordered this way.
+    # This isn't really scalable, but AESTHETICS BRO
+    loadout += "HEAD.......{}\n".format(data["chest"]["loadout"]["head"])
+    loadout += "CHEST......{}\n".format(data["chest"]["loadout"]["chest"])
+    loadout += "ARMS.......{}\n".format(data["chest"]["loadout"]["arms"])
+    loadout += "LEGS.......{}\n".format(data["chest"]["loadout"]["legs"])
+    loadout += "FEET.......{}\n".format(data["chest"]["loadout"]["feet"])
+    loadout += "WEAPON.....{}\n".format(data["chest"]["loadout"]["weapon"])
+    loadout += "SPELL......{}\n".format(data["chest"]["loadout"]["spell"])
+    loadout += "TRINKET....{}".format(data["chest"]["loadout"]["trinket"])
+
+    return ("```{}```".format(loadout))

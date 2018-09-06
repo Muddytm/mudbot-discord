@@ -66,6 +66,13 @@ async def chest(ctx, stuff=""):
 
 
 @client.command(pass_context=True)
+async def loadout(ctx, stuff=""):
+    """Show the user's loadout."""
+    await client.say(mudules.display_loadout(ctx.message.author.name,
+                                             ctx.message.author.id))
+
+
+@client.command(pass_context=True)
 async def scram(ctx, stuff=""):
     """Close the bot."""
     await client.say("I'm outta here.")

@@ -32,20 +32,26 @@ async def on_ready():
 
     # !test
     await client.send_message(bot_channel, "!test")
-    time.sleep(3)
+    time.sleep(2)
 
-    # !chest
+    # !chest and !loadout
     await client.send_message(bot_channel, "!chest")
+    time.sleep(1)
+
     for i in range(3):
         time.sleep(1)
         await client.send_message(bot_channel, "Incrementing key_counter...")
-    time.sleep(3)
+    time.sleep(2)
+
     await client.send_message(bot_channel, "!chest")
-    time.sleep(3)
+    time.sleep(2)
+
+    await client.send_message(bot_channel, "!loadout")
+    time.sleep(2)
 
     # !scram
     await client.send_message(bot_channel, "!scram")
-    time.sleep(3)
+    time.sleep(2)
 
     # Testing done!
     await client.send_message(bot_channel, "Travis CI testing complete.")
