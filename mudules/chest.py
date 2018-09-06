@@ -5,9 +5,10 @@ import os
 if not os.path.isfile("configs/chest_config.py"):
     with open("configs/chest_config.py", "w") as f:
         f.write("CONSUMER_KEY = \"\"\n"
-                      "CONSUMER_SECRET = \"\"\n"
-                      "ACCESS_TOKEN_KEY = \"\"\n"
-                      "ACCESS_TOKEN_SECRET = \"\"\n")
+                "CONSUMER_SECRET = \"\"\n"
+                "ACCESS_TOKEN_KEY = \"\"\n"
+                "ACCESS_TOKEN_SECRET = \"\"\n"
+                "key_counter_threshold = \"30\"")
 
 import configs.chest_config as config
 import json
@@ -51,6 +52,13 @@ def chest(ctx):
 
 def chest_key(message):
     """Increment the counter, and if the counter is high enough, get a key!"""
+    try:
+        int(config.key_counter_threshold)
+    except ValueError:
+        return ("The chest angrily snaps at you, revealing it to be a mimic. "
+                "Have your admins fix the configuration settings to defeat "
+                "this menace.")
+
     with open("userdata/{}_{}.json".format(message.author.name.replace(" ", ""), message.author.id)) as f:
         data = json.load(f)
 
@@ -60,7 +68,7 @@ def chest_key(message):
         data["chest"]["keys"] = 0
 
     new_key = False
-    if data["chest"]["key_counter"] < 9:
+    if data["chest"]["key_counter"] < (int(config.key_counter_threshold) - 1):
         data["chest"]["key_counter"] += 1
     else:
         data["chest"]["key_counter"] = 0
