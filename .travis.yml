@@ -9,5 +9,5 @@ script:
   - python python37_patches/discordpy_patch.py
   - python python37_patches/websockets_patch.py
   - python python37_patches/aiohttp_patch.py
-  - python run.py test
-  - python tests/travis_run.py
+  - python tests/config_maker.py
+  - python run.py test & python tests/travis_run.py
