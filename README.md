@@ -1,6 +1,6 @@
 # Mudbot for Discord
 
-[![Build Status](https://travis-ci.org/Muddytm/mudbot-discord.svg?branch=master)] (https://travis-ci.org/Muddytm/mudbot-discord)
+[![Build Status](https://travis-ci.org/Muddytm/mudbot-discord.svg?branch=master)](https://travis-ci.org/Muddytm/mudbot-discord)
 
 Mudbot is a Discord bot used for general-purpose hootenannying. It's also easy to create plugins for, so if you're just starting to write bots but want something solid to work with, look no further! Well, look a little further. But then come back here afterwards and say "ahh, this beats the things that I found when I looked *even further*."
 
