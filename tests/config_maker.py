@@ -3,6 +3,13 @@
 import os
 
 
+# Creating a normal config file with empty variables
+# (we'll be using a testing config)
+# NOWIMTHEPILOTOFTHISSPACESHIP = arbitrary dummy phrase from a song I like
+with open("config.py", "w") as f:
+    f.write("app_token = \"{}\"\n".format("NOWIMTHEPILOTOFTHISSPACESHIP"))
+
+
 # For Travis and Shiny Mudbot (Mudbot test)
 mudbot_token = (os.environ["mudbot_token"])
 travis_token = (os.environ["travis_token"])
