@@ -1,4 +1,4 @@
-"""Repairs the websockets package. Part of the Travis CI running process."""
+"""Patches the websockets package. Part of the Travis CI running process."""
 
 compat_loc = "/home/travis/virtualenv/python3.7-dev/lib/python3.7/site-packages/websockets/{}"
 
