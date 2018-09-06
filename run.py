@@ -68,7 +68,7 @@ async def chest(ctx, stuff=""):
 @client.command(pass_context=True)
 async def loadout(ctx, stuff=""):
     """Show the user's loadout."""
-    await client.say(mudules.display_loadout(ctx.message.author.name,
+    await client.say(mudules.display_loadout(ctx.message.author.name.replace(" ", ""),
                                              ctx.message.author.id))
 
 
