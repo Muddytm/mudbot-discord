@@ -24,12 +24,15 @@ CONSUMER_KEY = (os.environ["TWITTER_CONSUMER_KEY"])
 CONSUMER_SECRET = (os.environ["TWITTER_CONSUMER_SECRET"])
 ACCESS_TOKEN_KEY = (os.environ["TWITTER_ACCESS_TOKEN_KEY"])
 ACCESS_TOKEN_SECRET = (os.environ["TWITTER_ACCESS_TOKEN_SECRET"])
+key_counter_threshold = "5"
 
 with open("configs/chest_config.py", "w") as f:
     f.write("CONSUMER_KEY = \"{}\"\n"
             "CONSUMER_SECRET = \"{}\"\n"
             "ACCESS_TOKEN_KEY = \"{}\"\n"
-            "ACCESS_TOKEN_SECRET = \"{}\"\n".format(CONSUMER_KEY,
-                                                    CONSUMER_SECRET,
-                                                    ACCESS_TOKEN_KEY,
-                                                    ACCESS_TOKEN_SECRET))
+            "ACCESS_TOKEN_SECRET = \"{}\"\n"
+            "key_counter_threshold = \"{}\"\n".format(CONSUMER_KEY,
+                                                      CONSUMER_SECRET,
+                                                      ACCESS_TOKEN_KEY,
+                                                      ACCESS_TOKEN_SECRET,
+                                                      key_counter_threshold))
