@@ -5,7 +5,7 @@ compat_loc = "/home/travis/virtualenv/python3.7-dev/lib/python3.7/site-packages/
 with open(compat_loc.format("compat.py")) as fout:
     with open(compat_loc.format("compat_bk.py"), "w") as fin:
         for line in fout:
-            line.replace("create_task = asyncio.async", "create_task = getattr(asyncio, \"async\")")
+            line = line.replace("create_task = asyncio.async", "create_task = getattr(asyncio, \"async\")")
             fin.write(line)
 
 with open(compat_loc.format("compat_bk.py")) as fout:
