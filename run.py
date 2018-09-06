@@ -7,6 +7,9 @@ import mudules
 import os
 import sys
 
+if not os.path.isdir("userdata"):
+    os.makedirs("userdata")
+
 if os.path.isfile("tests/test_config.py") and len(sys.argv) > 1 and sys.argv[1] == "test":
     import tests.test_config as testconfig
     TOKEN = testconfig.mudbot_app_token
