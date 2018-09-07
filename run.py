@@ -3,7 +3,8 @@ from discord.ext import commands
 import config
 import discord
 import json
-import mudules
+import mudules.chest as chest
+import mudules.emoji as emoji
 import os
 import sys
 
@@ -43,7 +44,7 @@ async def on_message(message):
             json.dump(user_json, f)
 
     # Increment the counter, and if the counter is high enough, get a key!
-    r = mudules.chest_key(message)
+    r = chest.chest_key(message)
     if r != "":
         await client.send_message(message.channel, r)
 
@@ -62,14 +63,20 @@ async def chest(ctx, stuff=""):
     """Grant the user an item! If they have a key.
 
     Items taken at random from the Elder Scrolls Items Twitter."""
-    await client.say(mudules.chest(ctx))
+    await client.say(chest.chest(ctx))
 
 
 @client.command(pass_context=True)
 async def loadout(ctx, stuff=""):
     """Show the user's loadout."""
-    await client.say(mudules.display_loadout(ctx.message.author.name.replace(" ", ""),
-                                             ctx.message.author.id))
+    await client.say(chest.chestdisplay_loadout(ctx.message.author.name.replace(" ", ""),
+                                                ctx.message.author.id))
+
+
+@client.command(pass_context=True)
+async def clap(ctx, *stuff):
+    """Repeat what the user says, but with clap emojis."""
+    await client.say(emoji.clap(stuff))
 
 
 @client.command(pass_context=True)

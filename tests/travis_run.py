@@ -49,6 +49,11 @@ async def on_ready():
     await client.send_message(bot_channel, "!loadout")
     time.sleep(2)
 
+    # Emoji commands: !clap
+    test_text = "DON'T CALL YOURSELF A BOT IF YOU DON'T HAVE HUGE TESTIES"
+    await client.send_message(bot_channel, "!clap {}".format(test_text))
+    time.sleep(2)
+
     # !scram
     await client.send_message(bot_channel, "!scram")
     time.sleep(2)

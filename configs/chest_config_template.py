@@ -1,3 +1,4 @@
+"""Fill out the following fields and save as chest_config.py."""
 CONSUMER_KEY = ""
 CONSUMER_SECRET = ""
 ACCESS_TOKEN_KEY = ""
