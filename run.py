@@ -74,7 +74,15 @@ async def loadout(ctx, stuff=""):
 @client.command(pass_context=True)
 async def clap(ctx, *stuff):
     """Repeat what the user says, but with clap emojis."""
-    await client.say(mudules.clap(stuff))
+    clap_text = mudules.clap(stuff)
+    if clap_text.strip():
+        await client.say(clap_text)
+
+
+@client.command(pass_context=True)
+async def tellmeajoke(ctx):
+    """Tell a joke!"""
+    await client.say(mudules.telljoke(ctx.message.author.name))
 
 
 @client.command(pass_context=True)

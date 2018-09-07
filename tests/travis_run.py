@@ -54,6 +54,10 @@ async def on_ready():
     await client.send_message(bot_channel, "!clap {}".format(test_text))
     time.sleep(2)
 
+    # !tellmeajoke
+    await client.send_message(bot_channel, "!tellmeajoke")
+    time.sleep(2)
+
     # !scram
     await client.send_message(bot_channel, "!scram")
     time.sleep(2)

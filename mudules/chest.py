@@ -60,7 +60,9 @@ def chest(ctx):
             json.dump(data, f)
 
         slot = equip(found_item, name, id)
-        return ("{} found...{}!\nIt was equipped to your \"{}\" slot.".format(name_full, found_item, slot))
+        return ("{} found...{}!\nIt was equipped to your \"{}\" slot. "
+                "Type !loadout to check it out.".format(name_full, found_item,
+                                                        slot))
     else:
         return ("{} has no keys to open the chest with.".format(name_full))
 
