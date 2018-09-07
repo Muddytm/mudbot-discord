@@ -20,11 +20,11 @@ api = twitter.Api(consumer_key=config.CONSUMER_KEY,
                   access_token_key=config.ACCESS_TOKEN_KEY,
                   access_token_secret=config.ACCESS_TOKEN_SECRET)
 
-dirs = os.listdir("mudules/chest/items_glossary")
+dirs = os.listdir("mudules/items_glossary")
 glossary = {}
 for filename in dirs:
     glossary[filename.replace(".txt", "")] = []
-    with open("mudules/chest/items_glossary/{}".format(filename)) as f:
+    with open("mudules/items_glossary/{}".format(filename)) as f:
         lines = f.readlines()
         for line in lines:
             if line.strip():
