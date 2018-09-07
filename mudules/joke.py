@@ -15,7 +15,8 @@ def telljoke(name):
 
     joke = random.choice(joke_list)
 
+    # We put the joke in a string to ward off the \n monster.
     if "{}" in joke:
-        return (joke.format(name))
+        return ("{}".format(joke.format(name)))
     else:
-        return (joke)
+        return ("{}".format(joke))
