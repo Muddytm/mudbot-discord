@@ -1,4 +1,5 @@
 import asyncio
+import discord
 from discord.ext import commands
 import config
 import discord
@@ -6,6 +7,8 @@ import json
 import mudules
 import os
 import sys
+
+discord.opus.load_opus("opus")
 
 if not os.path.isdir("userdata"):
     os.makedirs("userdata")
