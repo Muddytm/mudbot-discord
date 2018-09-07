@@ -32,9 +32,12 @@ Your bot should now work with Python 3.7! Well done.
 
 Right now there are small amount of functions available:
 
-- `!test`: causes Mudbot to spit out a testing message.
+- `!test`: spits out a testing message.
 - `!chest`: attempts to unlock a chest for the user, granting them a stupid item from the TES\_ItemsBot Twitter page. A Twitter app must be made for this functionality to work, and the relevant tokens and keys listed in configs/chest\_config.py. Also requires a "key" to unlock the chest, acquired by sending messages in the server.
-- `!scram`: causes the bot to log out.
+- `!loadout`: displays gear gained from unlocking chests.
+- `!clap`: takes a phrase, inserts clap emojis, and spits it back out.
+- `!tellmeajoke`: tells a joke.
+- `!scram`: logs out (ending the process).
 
 ## FUTUUUUUUUURE
 
