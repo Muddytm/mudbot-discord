@@ -53,14 +53,13 @@ async def on_message(message):
 
 @client.command(pass_context=True)
 async def test(ctx, stuff="Despacito"):
-    await client.say("peep beep meme {} creep".format(stuff))
+    """peep beep meme creep"""
+    await client.say("peep beep {} creep".format(stuff))
 
 
 @client.command(pass_context=True)
 async def chest(ctx, stuff=""):
-    """Grant the user an item! If they have a key.
-
-    Items taken at random from the Elder Scrolls Items Twitter."""
+    """Grant the user an item! If they have a key."""
     await client.say(mudules.chest(ctx))
 
 
