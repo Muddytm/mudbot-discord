@@ -8,7 +8,7 @@ import mudules
 import os
 import sys
 
-discord.opus.load_opus("opus")
+# discord.opus.load_opus("opus")
 
 if not os.path.isdir("userdata"):
     os.makedirs("userdata")
