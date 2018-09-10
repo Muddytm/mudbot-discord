@@ -8,7 +8,7 @@ import mudules
 import os
 import sys
 
-discord.opus.load_opus("opus")
+# discord.opus.load_opus("opus")
 
 if not os.path.isdir("userdata"):
     os.makedirs("userdata")
@@ -87,17 +87,17 @@ async def tellmeajoke(ctx):
     await client.say(mudules.telljoke(ctx.message.author.name))
 
 
-@client.command(pass_context=True)
-async def play(ctx, link=""):
-    """Play audio from a YouTube link."""
-    if not link:
-        await client.say("You gotta put in a YouTube link, friend.")
-        return
-
-    if link.startswith("https://www.youtube.com/watch?v="):
-        voice = await client.join_voice_channel(ctx.message.author.voice.voice_channel)
-        player = await voice.create_ytdl_player(link)
-        player.start()
+# @client.command(pass_context=True)
+# async def play(ctx, link=""):
+#     """Play audio from a YouTube link."""
+#     if not link:
+#         await client.say("You gotta put in a YouTube link, friend.")
+#         return
+#
+#     if link.startswith("https://www.youtube.com/watch?v="):
+#         voice = await client.join_voice_channel(ctx.message.author.voice.voice_channel)
+#         player = await voice.create_ytdl_player(link)
+#         player.start()
 
 
 @client.command(pass_context=True)
