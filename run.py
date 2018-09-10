@@ -26,7 +26,7 @@ client = commands.Bot(command_prefix=commands.when_mentioned_or(BOT_PREFIX))
 def clean(name):
     """Cleans name of ASCII values for storage."""
     for ch in name:
-        if ord('ch') < 34 or ord('ch') > 127:
+        if ord(ch) < 34 or ord(ch) > 127:
             name = name.replace(ch, "")
 
     return name

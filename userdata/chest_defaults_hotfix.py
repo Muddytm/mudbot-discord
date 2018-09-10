@@ -1,3 +1,6 @@
+import os
+import json
+
 dirs = os.listdir("userdata")
 
 defaults = ["Fedora of Staunch Odor",
@@ -10,6 +13,9 @@ defaults = ["Fedora of Staunch Odor",
             "Empowered Nintendo 3DS of Pokemon Husbandry"]
 
 for filename in dirs:
+    if not filename.endswith(".json"):
+        continue
+
     with open("userdata/{}".format(filename)) as f:
         data = json.load(f)
 
