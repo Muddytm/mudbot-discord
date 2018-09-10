@@ -110,6 +110,7 @@ async def tellmeajoke(ctx):
 
 
 @client.command(pass_context=True)
+@commands.has_any_role("Admin", "Travis Bot")
 async def scram(ctx, stuff=""):
     """Close the bot."""
     await client.say("I'm outta here.")
