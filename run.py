@@ -6,6 +6,7 @@ import discord
 import json
 import mudules
 import os
+import random
 import sys
 
 # discord.opus.load_opus("opus")
@@ -53,8 +54,16 @@ async def on_message(message):
         with open("userdata/{}_{}.json".format(clean(message.author.name), message.author.id), "w") as f:
             user_json = {"name": clean(message.author.name), "id": message.author.id}
             json.dump(user_json, f)
+    else:
+        with open("userdata/{}_{}.json".format(clean(message.author.name), message.author.id)) as f:
+                data = json.load(f)
+
+        chest_optin = True
+        if "chest" in data and "optin" in data["chest"]:
+            chest_optin = data["chest"]["optin"]
 
     # Increment the counter, and if the counter is high enough, get a key!
+    # if chest_optin:
     r = mudules.chest_key(message)
     if r != "":
         await client.send_message(message.channel, r)
@@ -80,6 +89,28 @@ async def loadout(ctx, stuff=""):
     """Show the user's loadout."""
     await client.say(mudules.display_loadout(clean(ctx.message.author.name),
                                              ctx.message.author.id))
+
+
+# @client.command(pass_context=True)
+# async def optout(ctx, stuff=""):
+#     """Opt out of bot functions."""
+#     if stuff.lower() == "chest":
+#         mudules.chest_optout(clean(ctx.message.author.name),
+#                              ctx.message.author.id)
+#         await client.say("You have opted out of Chest.")
+#     elif not stuff:
+#         await client.say("You need to specify something to opt out of.")
+#
+#
+# @client.command(pass_context=True)
+# async def optin(ctx, stuff=""):
+#     """Opt in to bot functions."""
+#     if stuff.lower() == "chest":
+#         mudules.chest_optin(clean(ctx.message.author.name),
+#                             ctx.message.author.id)
+#         await client.say("You have opted out of Chest.")
+#     elif not stuff:
+#         await client.say("You need to specify something to opt in to.")
 
 
 @client.command(pass_context=True)
@@ -110,11 +141,23 @@ async def tellmeajoke(ctx):
 
 
 @client.command(pass_context=True)
-@commands.has_any_role("Admin", "Travis Bot")
+#@commands.has_any_role("Admin", "Travis Bot")
 async def scram(ctx, stuff=""):
     """Close the bot."""
-    await client.say("I'm outta here.")
-    await client.logout()
+
+    auth = False
+    auth_roles = ["Admin", "Travis Bot"]
+
+    for r in ctx.message.author.roles:
+        if r.name in auth_roles:
+            auth = True
+
+    if auth:
+        await client.say("I'm outta here.")
+        await client.logout()
+    else:
+        nope_messages = ["Nope.", "Uh, no.", "No!", "Negative.", "Nah."]
+        await client.say(random.choice(nope_messages))
 
 
 client.run(TOKEN)

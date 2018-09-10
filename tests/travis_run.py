@@ -30,6 +30,10 @@ async def on_ready():
     # TESTING STARTS HERE
     # -------------------
 
+    # !help
+    await client.send_message(bot_channel, "!help")
+    time.sleep(2)
+
     # !test
     await client.send_message(bot_channel, "!test")
     time.sleep(2)
@@ -48,6 +52,15 @@ async def on_ready():
 
     await client.send_message(bot_channel, "!loadout")
     time.sleep(2)
+
+    opt_test_list = ["out", "in"]
+    for option in opt_test_list:
+        await client.send_message(bot_channel, "!opt{} chest".format(option))
+        time.sleep(1)
+        for i in range(3):
+            time.sleep(1)
+            await client.send_message(bot_channel, "Incrementing key_counter...")
+    time.sleep(1)
 
     # Emoji commands: !clap
     test_text = "DON'T CALL YOURSELF A BOT IF YOU DON'T HAVE HUGE TESTIES"

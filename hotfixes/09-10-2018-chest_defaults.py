@@ -1,3 +1,5 @@
+"""Turn old defaults into [none]. Run in mudbot-discord directory."""
+
 import os
 import json
 

@@ -31,9 +31,18 @@ for filename in dirs:
                 glossary[filename.replace(".txt", "")].append(line.strip())
 
 
+def clean(name):
+    """Cleans name of ASCII values for storage."""
+    for ch in name:
+        if ord(ch) < 34 or ord(ch) > 127:
+            name = name.replace(ch, "")
+
+    return name
+
+
 def chest(ctx):
     """Query TES_ItemsBot."""
-    name = ctx.message.author.name.replace(" ", "")
+    name = clean(ctx.message.author.name)
     name_full = ctx.message.author.name
     id = ctx.message.author.id
 
@@ -69,7 +78,7 @@ def chest(ctx):
 
 def chest_key(message):
     """Increment the counter, and if the counter is high enough, get a key!"""
-    name = message.author.name.replace(" ", "")
+    name = clean(message.author.name)
     name_full = message.author.name
     id = message.author.id
 
@@ -87,6 +96,7 @@ def chest_key(message):
         data["chest"] = {}
         data["chest"]["key_counter"] = 0
         data["chest"]["keys"] = 0
+        data["chest"]["optin"] = True
         data["chest"]["loadout"] = {}
         data["chest"]["loadout"]["head"] = "[none]" #"Fedora of Staunch Odor"
         data["chest"]["loadout"]["chest"] = "[none]" #"\"Eat. Sleep. Play Fortnite.\" T-Shirt of Purity"
@@ -174,3 +184,25 @@ def display_loadout(name, id):
     loadout += "TRINKET....{}".format(data["chest"]["loadout"]["trinket"])
 
     return ("```{}```".format(loadout))
+
+
+def chest_optout(name, id):
+    """Opt out of Chest."""
+    with open("userdata/{}_{}.json".format(name, id)) as f:
+        data = json.load(f)
+
+    data["chest"]["optin"] = False
+
+    with open("userdata/{}_{}.json".format(name, id), "w") as f:
+        json.dump(data, f)
+
+
+def chest_optin(name, id):
+    """Opt in to Chest."""
+    with open("userdata/{}_{}.json".format(name, id)) as f:
+        data = json.load(f)
+
+    data["chest"]["optin"] = True
+
+    with open("userdata/{}_{}.json".format(name, id), "w") as f:
+        json.dump(data, f)
