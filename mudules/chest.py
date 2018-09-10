@@ -88,14 +88,14 @@ def chest_key(message):
         data["chest"]["key_counter"] = 0
         data["chest"]["keys"] = 0
         data["chest"]["loadout"] = {}
-        data["chest"]["loadout"]["head"] = "Fedora of Staunch Odor"
-        data["chest"]["loadout"]["chest"] = "\"Eat. Sleep. Play Fortnite.\" T-Shirt of Purity"
-        data["chest"]["loadout"]["arms"] = "Fingerless Gloves of Dexterity"
-        data["chest"]["loadout"]["legs"] = "Minor Cargo Shorts of Celibacy"
-        data["chest"]["loadout"]["feet"] = "Combat Boots of Charm Resistance"
-        data["chest"]["loadout"]["weapon"] = "Hatsune Miku Vintage Body Pillow (quality: used)"
-        data["chest"]["loadout"]["spell"] = "Word of Power Learned: Repel, Attractive Woman"
-        data["chest"]["loadout"]["trinket"] = "Empowered Nintendo 3DS of Pokemon Husbandry"
+        data["chest"]["loadout"]["head"] = "[none]" #"Fedora of Staunch Odor"
+        data["chest"]["loadout"]["chest"] = "[none]" #"\"Eat. Sleep. Play Fortnite.\" T-Shirt of Purity"
+        data["chest"]["loadout"]["arms"] = "[none]" #"Fingerless Gloves of Dexterity"
+        data["chest"]["loadout"]["legs"] = "[none]" #"Minor Cargo Shorts of Celibacy"
+        data["chest"]["loadout"]["feet"] = "[none]" #"Combat Boots of Charm Resistance"
+        data["chest"]["loadout"]["weapon"] = "[none]" #"Hatsune Miku Vintage Body Pillow (quality: used)"
+        data["chest"]["loadout"]["spell"] = "[none]" #"Word of Power Learned: Repel, Attractive Woman"
+        data["chest"]["loadout"]["trinket"] = "[none]" #"Empowered Nintendo 3DS of Pokemon Husbandry"
 
     new_key = False
     if data["chest"]["key_counter"] < (int(config.key_counter_threshold) - 1):

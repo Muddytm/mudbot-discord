@@ -3,3 +3,6 @@ jersey
 jacket
 overalls
 bra
+hoodie
+sweater
+coat

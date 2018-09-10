@@ -11,3 +11,4 @@ katana
 shuriken
 halberd
 knife
+whip
