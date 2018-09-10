@@ -23,6 +23,15 @@ BOT_PREFIX = "!"
 client = commands.Bot(command_prefix=commands.when_mentioned_or(BOT_PREFIX))
 
 
+def clean(name):
+    """Cleans name of ASCII values for storage."""
+    for ch in name:
+        if ord('ch') < 34 or ord('ch') > 127:
+            name = name.replace(ch, "")
+
+    return name
+
+
 @client.event
 async def on_ready():
     print ("Logged in as")
@@ -40,9 +49,9 @@ async def on_message(message):
         return
 
     # Let's create a JSON file for this user.
-    if not os.path.isfile("userdata/{}_{}.json".format(message.author.name.replace(" ", ""), message.author.id)):
-        with open("userdata/{}_{}.json".format(message.author.name.replace(" ", ""), message.author.id), "w") as f:
-            user_json = {"name": message.author.name, "id": message.author.id}
+    if not os.path.isfile("userdata/{}_{}.json".format(clean(message.author.name), message.author.id)):
+        with open("userdata/{}_{}.json".format(clean(message.author.name), message.author.id), "w") as f:
+            user_json = {"name": clean(message.author.name), "id": message.author.id}
             json.dump(user_json, f)
 
     # Increment the counter, and if the counter is high enough, get a key!
@@ -69,8 +78,8 @@ async def chest(ctx, stuff=""):
 @client.command(pass_context=True)
 async def loadout(ctx, stuff=""):
     """Show the user's loadout."""
-    await client.say(mudules.display_loadout(ctx.message.author.name.replace(" ", ""),
-                                                        ctx.message.author.id))
+    await client.say(mudules.display_loadout(clean(ctx.message.author.name),
+                                             ctx.message.author.id))
 
 
 @client.command(pass_context=True)
@@ -84,7 +93,7 @@ async def clap(ctx, *stuff):
 @client.command(pass_context=True)
 async def tellmeajoke(ctx):
     """Tell a joke!"""
-    await client.say(mudules.telljoke(ctx.message.author.name))
+    await client.say(mudules.telljoke(clean(ctx.message.author.name)))
 
 
 # @client.command(pass_context=True)
