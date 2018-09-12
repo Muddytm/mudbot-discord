@@ -53,17 +53,17 @@ async def on_ready():
     await client.send_message(bot_channel, "!loadout")
     time.sleep(2)
 
-    opt_test_list = ["out", "in"]
-    for option in opt_test_list:
-        await client.send_message(bot_channel, "!opt{} chest".format(option))
+    await client.send_message(bot_channel, "!optout chest")
+    time.sleep(2)
+
+    for i in range(3):
         time.sleep(1)
-        for i in range(3):
-            time.sleep(1)
-            await client.send_message(bot_channel, "Incrementing key_counter...")
+        await client.send_message(bot_channel, "Incrementing key_counter...")
+    await client.send_message(bot_channel, "(Nothing should've happened)")
     time.sleep(1)
 
     # Emoji commands: !clap
-    test_text = "DON'T CALL YOURSELF A BOT IF YOU DON'T HAVE HUGE TESTIES"
+    test_text = ("ROKO'S BASILISK IS A THOUGHT EXPERIMENT ABOUT THE POTENTIAL RISKS INVOLVED IN DEVELOPING ARTIFICIAL INTELLIGENCE. THE PREMISE IS THAT AN ALL-POWERFUL ARTIFICIAL INTELLIGENCE FROM THE FUTURE COULD RETROACTIVELY PUNISH THOSE WHO DID NOT HELP BRING ABOUT ITS EXISTENCE, INCLUDING THOSE WHO MERELY KNEW ABOUT THE POSSIBLE DEVELOPMENT OF SUCH A BEING")
     await client.send_message(bot_channel, "!clap {}".format(test_text))
     time.sleep(2)
 

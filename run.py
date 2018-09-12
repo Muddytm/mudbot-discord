@@ -63,10 +63,10 @@ async def on_message(message):
             chest_optin = data["chest"]["optin"]
 
     # Increment the counter, and if the counter is high enough, get a key!
-    # if chest_optin:
-    r = mudules.chest_key(message)
-    if r != "":
-        await client.send_message(message.channel, r)
+    if chest_optin:
+        r = mudules.chest_key(message)
+        if r != "":
+            await client.send_message(message.channel, r)
 
     # This allows us to use other commands as well.
     await client.process_commands(message)
@@ -91,26 +91,26 @@ async def loadout(ctx, stuff=""):
                                              ctx.message.author.id))
 
 
-# @client.command(pass_context=True)
-# async def optout(ctx, stuff=""):
-#     """Opt out of bot functions."""
-#     if stuff.lower() == "chest":
-#         mudules.chest_optout(clean(ctx.message.author.name),
-#                              ctx.message.author.id)
-#         await client.say("You have opted out of Chest.")
-#     elif not stuff:
-#         await client.say("You need to specify something to opt out of.")
-#
-#
-# @client.command(pass_context=True)
-# async def optin(ctx, stuff=""):
-#     """Opt in to bot functions."""
-#     if stuff.lower() == "chest":
-#         mudules.chest_optin(clean(ctx.message.author.name),
-#                             ctx.message.author.id)
-#         await client.say("You have opted out of Chest.")
-#     elif not stuff:
-#         await client.say("You need to specify something to opt in to.")
+@client.command(pass_context=True)
+async def optout(ctx, stuff=""):
+    """Opt out of bot functions."""
+    if stuff.lower() == "chest":
+        mudules.chest_optout(clean(ctx.message.author.name),
+                             ctx.message.author.id)
+        await client.say("You have opted out of Chest.")
+    elif not stuff:
+        await client.say("You need to specify something to opt out of.")
+
+
+@client.command(pass_context=True)
+async def optin(ctx, stuff=""):
+    """Opt in to bot functions."""
+    if stuff.lower() == "chest":
+        mudules.chest_optin(clean(ctx.message.author.name),
+                            ctx.message.author.id)
+        await client.say("You have opted in to Chest.")
+    elif not stuff:
+        await client.say("You need to specify something to opt in to.")
 
 
 @client.command(pass_context=True)
