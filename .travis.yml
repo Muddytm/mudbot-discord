@@ -6,8 +6,9 @@ install:
   - pip3 install discord.py
   - pip3 install requests
   - pip3 install python-twitter
-  - pip3 install PyNaCl
-  - pip3 install youtube_dl
+  #- pip3 install PyNaCl
+  #- pip3 install youtube_dl
+  #- pip3 install ffmpeg
 script:
   - python tests/config_maker.py
   - python run.py test & python tests/travis_run.py

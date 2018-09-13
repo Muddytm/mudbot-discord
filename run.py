@@ -9,7 +9,8 @@ import os
 import random
 import sys
 
-# discord.opus.load_opus("opus")
+# if not discord.opus.is_loaded():
+#     discord.opus.load_opus("opus")
 
 if not os.path.isdir("userdata"):
     os.makedirs("userdata")
