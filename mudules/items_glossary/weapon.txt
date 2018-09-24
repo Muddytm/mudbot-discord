@@ -12,3 +12,9 @@ shuriken
 halberd
 knife
 whip
+pickaxe
+mace
+scimitar
+cutlass
+rapier
+club

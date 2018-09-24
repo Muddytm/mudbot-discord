@@ -6,3 +6,6 @@ bra
 hoodie
 sweater
 coat
+cuirass
+apron
+tuxedo

@@ -4,3 +4,9 @@ trunks
 pants
 skirt
 dress
+jeans
+diaper
+diapers
+underwear
+boxers
+briefs
