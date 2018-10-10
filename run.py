@@ -41,6 +41,13 @@ async def on_ready():
     print (client.user.id)
     print ("------")
 
+    if len(sys.argv) > 1 and sys.argv[1] == "highnoon":
+        for channel in client.get_all_channels():
+            if channel.name == "general":
+                await client.send_file(channel, r"sounds/highnoon.ogg",
+                                       filename="highnoon.ogg",
+                                       content="*It's hiiiiigh noooooon.*")
+
 
 @client.event
 async def on_message(message):
