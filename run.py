@@ -47,6 +47,7 @@ async def on_ready():
                 await client.send_file(channel, r"sounds/highnoon.ogg",
                                        filename="highnoon.ogg",
                                        content="*It's hiiiiigh noooooon.*")
+                await client.logout()
 
 
 @client.event
