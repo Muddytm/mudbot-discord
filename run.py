@@ -77,6 +77,10 @@ async def on_message(message):
         if r != "":
             await client.send_message(message.channel, r)
 
+    if message.content.endswith("!") and len(message.content.split()) == 1:
+        await client.send_file(message.channel, r"sounds/SQUEEZE_MY_HOG.ogg",
+                               filename="SQUEEZE_MY_HOG.ogg")
+
     # This allows us to use other commands as well.
     await client.process_commands(message)
 
